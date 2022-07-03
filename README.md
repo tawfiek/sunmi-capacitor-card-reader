@@ -13,25 +13,23 @@ npx cap sync
 
 <docgen-index>
 
-* [`echo(...)`](#echo)
+* [Type Aliases](#type-aliases)
 
 </docgen-index>
 
 <docgen-api>
 <!--Update the source file JSDoc comments and rerun docgen to update the docs below-->
 
-### echo(...)
+### Type Aliases
 
-```typescript
-echo(options: { value: string; }) => Promise<{ value: string; }>
-```
 
-| Param         | Type                            |
-| ------------- | ------------------------------- |
-| **`options`** | <code>{ value: string; }</code> |
+#### SunmiCardResult
 
-**Returns:** <code>Promise&lt;{ value: string; }&gt;</code>
+<code>{ uuid: string; }</code>
 
---------------------
+
+#### SunmiCardDeviceModel
+
+<code>{ model: string, isP2: boolean, isP1N: boolean, isP2Lite: boolean, isP2Pro: boolean, isP14G: boolean, }</code>
 
 </docgen-api>
