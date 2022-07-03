@@ -1,13 +1,7 @@
 # sunmi-p2-card-reader
 
 This a plugin to integrate with sunmi payment SDK and work with the NFC card reader, test on Sunmi P2 only
-<!--
-  model: string,
-  isP2: boolean,
-  isP1N: boolean,
-  isP2Lite: boolean,
-  isP2Pro: boolean,
-  isP14G: boolean, -->
+
 ### Supported Devices:
 * Sunmi P2 (Tested on this model only).
 * Sunmi P1N.
@@ -33,6 +27,19 @@ npx cap sync
 <docgen-api>
 <!--Update the source file JSDoc comments and rerun docgen to update the docs below-->
 
+### Type Aliases
+
+
+#### SunmiCardResult
+
+<code>{ uuid: string; }</code>
+
+
+#### SunmiCardDeviceModel
+
+<code>{ model: string, isP2: boolean, isP1N: boolean, isP2Lite: boolean, isP2Pro: boolean, isP14G: boolean, }</code>
+
+</docgen-api>
 ### Type Aliases
 
 

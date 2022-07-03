@@ -1,6 +1,19 @@
 export interface SunmiCardReaderPlugin {
+  /**
+   * Start listing to read the card,
+   * you have to initialize the SDK first before calling this functionality.
+   * @returns Promise<SunmiCardResult>
+   */
   readCard: () => Promise<SunmiCardResult>;
+  /**
+   * Get the device model details.
+   * @returns Promise<SunmiCardResult>
+   */
   getDeviceModel: () => Promise<SunmiCardDeviceModel>;
+  /**
+   * Initializes the SDK to start reading cards.
+   * @returns Promise<void>
+   */
   initSunmiSDK: () => Promise<void>;
 }
 
