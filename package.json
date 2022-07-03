@@ -1,7 +1,7 @@
 {
-  "name": "sunmi-p2-card-reader",
+  "name": "@capacitor-community/sunmi-card-reader",
   "version": "0.0.1",
-  "description": "This a plugin for sunmi p2 device to implement card reader",
+  "description": "This is a plugin to integrate with sunmi payment SDK and work with the NFC card reader",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
   "types": "dist/esm/index.d.ts",

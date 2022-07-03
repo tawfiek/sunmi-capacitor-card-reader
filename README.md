@@ -1,11 +1,24 @@
 # sunmi-p2-card-reader
 
-This a plugin for sunmi p2 device to implement card reader
+This a plugin to integrate with sunmi payment SDK and work with the NFC card reader, test on Sunmi P2 only
+<!--
+  model: string,
+  isP2: boolean,
+  isP1N: boolean,
+  isP2Lite: boolean,
+  isP2Pro: boolean,
+  isP14G: boolean, -->
+### Supported Devices:
+* Sunmi P2 (Tested on this model only).
+* Sunmi P1N.
+* Sunmi P2Lite.
+* Sunmi P2Pro.
+* Sunmi P14G.
 
 ## Install
 
 ```bash
-npm install sunmi-p2-card-reader
+npm install @capacitor-community/sunmi-card-reader
 npx cap sync
 ```
 
