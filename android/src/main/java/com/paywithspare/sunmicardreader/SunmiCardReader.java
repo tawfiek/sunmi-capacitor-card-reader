@@ -16,23 +16,13 @@ import com.paywithspare.sunmicardreader.utils.DeviceUtil;
 public class SunmiCardReader {
     protected String TAG = "SunmiCardReader";
     private PluginCall capacitorCall;
-    private PaymentKernel kernel;
 
     private void checkCard(PluginCall call) {
         try {
+            final int TIMEOUT_DAY = 24 * 60 *60;
             this.capacitorCall = call;
 
-            if (kernel == null) {
-                throw new RemoteException("Payment kernel is not initialized !");
-            }
-
-            if (!kernel.isConnected()) {
-                throw new RemoteException("Payment Kernel is not connected, please try to initialize it again ");
-            }
-
-            LogUtil.e("#DEBUG =>> ", "Init is okay here");
-
-            kernel.readCardOptV2.checkCard(AidlConstants.CardType.MIFARE.getValue(), mReadCardCallback, 90000);
+            PaymentKernel.readCardOptV2.checkCard(AidlConstants.CardType.MIFARE.getValue(), mReadCardCallback, TIMEOUT_DAY);
         } catch (RemoteException e) {
             call.reject(e.getMessage());
             this.capacitorCall = null;
@@ -102,7 +92,7 @@ public class SunmiCardReader {
     }
 
     public Boolean initSunmiSDK (Context applicationContext) {
-        kernel = new PaymentKernel(applicationContext);
+        PaymentKernel.initPayKernel(applicationContext);
 
         return true;
     }
