@@ -2,6 +2,7 @@ package com.paywithspare.sunmicardreader;
 
 import android.content.Context;
 
+import com.getcapacitor.Bridge;
 import com.getcapacitor.JSObject;
 import com.getcapacitor.Plugin;
 import com.getcapacitor.PluginCall;
@@ -14,9 +15,14 @@ public class SunmiCardReaderPlugin extends Plugin {
     private SunmiCardReader implementation = new SunmiCardReader();
 
 
-    @PluginMethod
+    @PluginMethod(returnType = PluginMethod.RETURN_CALLBACK)
     public void readCard (PluginCall call) {
         implementation.readCard(call);
+    }
+
+    @PluginMethod
+    public void closeCardReader (PluginCall call) {
+        implementation.closeCardReader(call);
     }
 
     @PluginMethod

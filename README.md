@@ -20,6 +20,7 @@ npx cap sync
 
 <docgen-index>
 
+* [Interfaces](#interfaces)
 * [Type Aliases](#type-aliases)
 
 </docgen-index>
@@ -27,12 +28,25 @@ npx cap sync
 <docgen-api>
 <!--Update the source file JSDoc comments and rerun docgen to update the docs below-->
 
+### Interfaces
+
+
+#### PluginResultData
+
+
+#### PluginResultError
+
+| Prop          | Type                |
+| ------------- | ------------------- |
+| **`message`** | <code>string</code> |
+
+
 ### Type Aliases
 
 
-#### SunmiCardResult
+#### PluginCallback
 
-<code>{ uuid: string; }</code>
+<code>(data: <a href="#pluginresultdata">PluginResultData</a>, error?: <a href="#pluginresulterror">PluginResultError</a>): void</code>
 
 
 #### SunmiCardDeviceModel

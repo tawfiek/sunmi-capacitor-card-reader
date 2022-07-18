@@ -1,6 +1,6 @@
-import { WebPlugin, PluginImplementations} from '@capacitor/core';
+import { WebPlugin } from '@capacitor/core';
 
-import type { SunmiCardDeviceModel, SunmiCardReaderPlugin, SunmiCardResult } from './definitions';
+import type { SunmiCardDeviceModel, SunmiCardReaderPlugin } from './definitions';
 
 export class SunmiCardReaderWeb
   extends WebPlugin
@@ -10,7 +10,11 @@ export class SunmiCardReaderWeb
   }
 
 
-  async readCard (): Promise<SunmiCardResult> {
+  readCard (): void {
+    throw new Error('No web implementation please run the application on an android device [Sunmi Device]');
+  }
+
+  async closeCardReader (): Promise<void> {
     throw new Error('No web implementation please run the application on an android device [Sunmi Device]');
   }
 

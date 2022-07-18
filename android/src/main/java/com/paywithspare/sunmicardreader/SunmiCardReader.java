@@ -8,21 +8,30 @@ import android.util.Log;
 import com.getcapacitor.JSObject;
 import com.getcapacitor.PluginCall;
 import com.paywithspare.sunmicardreader.utils.LogUtil;
+import com.paywithspare.sunmicardreader.utils.ThreadPoolUtil;
 import com.sunmi.pay.hardware.aidl.AidlConstants;
 import com.sunmi.pay.hardware.aidlv2.readcard.CheckCardCallbackV2;
 
 import com.paywithspare.sunmicardreader.utils.DeviceUtil;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class SunmiCardReader {
+
+    final int TIMEOUT = 120;
     protected String TAG = "SunmiCardReader";
     private PluginCall capacitorCall;
 
     private void checkCard(PluginCall call) {
         try {
-            final int TIMEOUT_DAY = 24 * 60 *60;
             this.capacitorCall = call;
-
-            PaymentKernel.readCardOptV2.checkCard(AidlConstants.CardType.MIFARE.getValue(), mReadCardCallback, TIMEOUT_DAY);
+            if (PaymentKernel.readCardOptV2 == null) {
+                call.reject("SDK is not initialized ");
+                this.capacitorCall = null;
+                return;
+            }
+            PaymentKernel.readCardOptV2.checkCard(AidlConstants.CardType.MIFARE.getValue(), mReadCardCallback, TIMEOUT);
         } catch (RemoteException e) {
             call.reject(e.getMessage());
             this.capacitorCall = null;
@@ -38,7 +47,8 @@ public class SunmiCardReader {
             response.put("bundle", bundle);
 
             capacitorCall.resolve(response);
-            capacitorCall = null;
+            ThreadPoolUtil.wait(3000);
+            PaymentKernel.readCardOptV2.checkCard(AidlConstants.CardType.MIFARE.getValue(), mReadCardCallback, TIMEOUT);
         }
 
         @Override
@@ -48,7 +58,8 @@ public class SunmiCardReader {
             response.put("atr", atr);
 
             capacitorCall.resolve(response);
-            capacitorCall = null;
+            ThreadPoolUtil.wait(3000);
+            PaymentKernel.readCardOptV2.checkCard(AidlConstants.CardType.MIFARE.getValue(), mReadCardCallback, TIMEOUT);
         }
 
         @Override
@@ -59,22 +70,38 @@ public class SunmiCardReader {
 
             capacitorCall.resolve(response);
             LogUtil.e(TAG, "Resolved to JS");
-
-            capacitorCall = null;
+            ThreadPoolUtil.wait(3000);
+            PaymentKernel.readCardOptV2.checkCard(AidlConstants.CardType.MIFARE.getValue(), mReadCardCallback, TIMEOUT);
         }
 
         @Override
         public void onError(final int code, final String msg) throws RemoteException {
-            LogUtil.e(TAG, "check card error,code:" + code + "message:" + msg);
+            LogUtil.e(TAG, "check card error,code:" + code + " message:" + msg);
 
-            capacitorCall.reject(String.valueOf(code), msg);
-            capacitorCall = null;
+            capacitorCall.errorCallback(msg);
+            ThreadPoolUtil.wait(3000);
+            PaymentKernel.readCardOptV2.checkCard(AidlConstants.CardType.MIFARE.getValue(), mReadCardCallback, TIMEOUT);
         }
     };
 
 
     public void readCard (PluginCall call) {
+        call.setKeepAlive(true);
         checkCard(call);
+    }
+
+    public void closeCardReader (PluginCall call) {
+        try {
+            if (this.capacitorCall == null) {
+                call.reject("Card reader is not open already");
+            } else {
+                PaymentKernel.readCardOptV2.cancelCheckCard();
+                call.resolve();
+            }
+        } catch (RemoteException e) {
+            call.reject("Can not cancel check card");
+            LogUtil.e("RemoteException while canceling the check card", e.getMessage());
+        }
     }
 
     public JSObject getDeviceModel () {
