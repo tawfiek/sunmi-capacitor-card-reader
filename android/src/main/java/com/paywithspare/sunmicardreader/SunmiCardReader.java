@@ -75,6 +75,21 @@ public class SunmiCardReader {
             LogUtil.e(TAG, "check card error,code:" + code + " message:" + msg);
 
             capacitorCall.errorCallback(msg);
+            if (code == -30005) {
+                LogUtil.e(TAG, "check card timeout");
+                ThreadPoolUtil.executeInSinglePool(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            ThreadPoolUtil.wait(1000);
+                            PaymentKernel.readCardOptV2.cancelCheckCard();
+                            PaymentKernel.readCardOptV2.checkCard(AidlConstants.CardType.MIFARE.getValue(), mReadCardCallback, TIMEOUT);
+                        } catch (RemoteException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+            }
         }
     };
 
