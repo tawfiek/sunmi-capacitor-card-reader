@@ -25,6 +25,8 @@ public class SunmiCardReader {
 
     private void checkCard(PluginCall call) {
         try {
+            LogUtil.e(TAG, "Checkcard Called ");
+
             this.capacitorCall = call;
             if (PaymentKernel.readCardOptV2 == null) {
                 call.reject("SDK is not initialized ");
@@ -47,8 +49,6 @@ public class SunmiCardReader {
             response.put("bundle", bundle);
 
             capacitorCall.resolve(response);
-            ThreadPoolUtil.wait(3000);
-            PaymentKernel.readCardOptV2.checkCard(AidlConstants.CardType.MIFARE.getValue(), mReadCardCallback, TIMEOUT);
         }
 
         @Override
@@ -58,8 +58,6 @@ public class SunmiCardReader {
             response.put("atr", atr);
 
             capacitorCall.resolve(response);
-            ThreadPoolUtil.wait(3000);
-            PaymentKernel.readCardOptV2.checkCard(AidlConstants.CardType.MIFARE.getValue(), mReadCardCallback, TIMEOUT);
         }
 
         @Override
@@ -70,8 +68,6 @@ public class SunmiCardReader {
 
             capacitorCall.resolve(response);
             LogUtil.e(TAG, "Resolved to JS");
-            ThreadPoolUtil.wait(3000);
-            PaymentKernel.readCardOptV2.checkCard(AidlConstants.CardType.MIFARE.getValue(), mReadCardCallback, TIMEOUT);
         }
 
         @Override
@@ -79,8 +75,6 @@ public class SunmiCardReader {
             LogUtil.e(TAG, "check card error,code:" + code + " message:" + msg);
 
             capacitorCall.errorCallback(msg);
-            ThreadPoolUtil.wait(3000);
-            PaymentKernel.readCardOptV2.checkCard(AidlConstants.CardType.MIFARE.getValue(), mReadCardCallback, TIMEOUT);
         }
     };
 
