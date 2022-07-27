@@ -1,6 +1,6 @@
 {
   "name": "sunmi-card-reader",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "This is a plugin to integrate with sunmi payment SDK and work with the NFC card reader",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
