@@ -45,18 +45,14 @@ repositories {
     google()
     mavenCentral()
     jcenter()
-    flatDir {
-        dirs '../External Libraries'
-    }
 }
 
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar, *.aar'])
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':capacitor-android')
     implementation "androidx.appcompat:appcompat:$androidxAppCompatVersion"
-    implementation(name:'PayLib-release-1.4.57', ext:'aar')
-    implementation files('src/main/libs/PayLib-release-1.4.57-sources.jar')
+    implementation "com.sunmi:PayLib-release:2.0.07"
     testImplementation "junit:junit:$junitVersion"
     androidTestImplementation "androidx.test.ext:junit:$androidxJunitVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$androidxEspressoCoreVersion"
