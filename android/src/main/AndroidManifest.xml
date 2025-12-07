@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.paywithspare.sunmicardreader">
+    >
 
     <uses-permission android:name="com.sunmi.perm.LED" />
     <uses-permission android:name="com.sunmi.perm.MSR" />
