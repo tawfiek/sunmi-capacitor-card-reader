@@ -11,13 +11,13 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "@capacitor/core": "latest",
-    "@capacitor/camera": "latest",
-    "@capacitor/splash-screen": "latest",
+    "@capacitor/core": "^8.0.0",
+    "@capacitor/camera": "^8.0.0",
+    "@capacitor/splash-screen": "^8.0.0",
     "sunmi-p2-card-reader": "file:.."
   },
   "devDependencies": {
-    "@capacitor/cli": "latest"
+    "@capacitor/cli": "^8.0.0"
   },
   "author": "",
   "license": "ISC"

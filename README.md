@@ -9,6 +9,13 @@ This a plugin to integrate with sunmi payment SDK and work with the NFC card rea
 * Sunmi P2Pro.
 * Sunmi P14G.
 
+## Requirements
+
+- Capacitor 8 or newer.
+- Node.js 22 or newer for development.
+- Android: API 24 or newer; compile/target SDK 36 and Java 21.
+- iOS: 15.0 or newer; Xcode 26 or newer. The iOS implementation is an echo stub; card-reader functionality is Android-only.
+
 ## Install
 
 ```bash
